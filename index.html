@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Volary Browser — Security-first browsing</title>
-  <meta name="description" content="A security-first, context-aware web browser built on Chromium. Encrypted vault, built-in ad blocking, reading mode, and full accessibility.">
+  <title>Volary Browser — Private by default. Free by design.</title>
+  <meta name="description" content="A privacy-first browser with SQLCipher encrypted database, 8 privacy protections on by default, private AI sidebar, uncensored search, and zero tracking. Open source. Cross-platform.">
   <style>
     :root {
       --bg: #0a0a0a;
@@ -14,6 +14,8 @@
       --muted: #888;
       --accent: #3b82f6;
       --accent-hover: #2563eb;
+      --green: #22c55e;
+      --green-dim: rgba(34, 197, 94, 0.12);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -71,7 +73,7 @@
     .hero p {
       font-size: 1.2rem;
       color: var(--muted);
-      max-width: 560px;
+      max-width: 600px;
       margin: 0 auto 48px;
     }
     .badge {
@@ -124,6 +126,70 @@
     .btn svg {
       width: 18px;
       height: 18px;
+    }
+
+    /* Privacy Section */
+    .privacy-section {
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+    }
+    .privacy-section h2 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    .privacy-section > .container > p {
+      text-align: center;
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto 48px;
+      font-size: 1.05rem;
+    }
+    .privacy-defaults {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .privacy-defaults h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--green);
+    }
+    .privacy-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 32px;
+    }
+    .privacy-list li {
+      font-size: 0.9rem;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .privacy-list li::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      flex-shrink: 0;
+    }
+    .privacy-note {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-align: center;
     }
 
     /* Features */
@@ -200,6 +266,7 @@
       .hero { padding: 80px 0 60px; }
       .feature-grid { grid-template-columns: 1fr; }
       .downloads { flex-direction: column; align-items: center; }
+      .privacy-list { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -208,6 +275,7 @@
     <div class="container">
       <div class="logo">Volary</div>
       <div class="nav-links">
+        <a href="#privacy">Privacy</a>
         <a href="#features">Features</a>
         <a href="https://github.com/CrashBytes/volarybrowser">Source</a>
         <a href="https://github.com/CrashBytes/volarybrowser/issues">Report Issue</a>
@@ -217,9 +285,9 @@
 
   <section class="hero">
     <div class="container">
-      <div class="badge">Alpha Release</div>
-      <h1>Browsing that puts<br>you in control</h1>
-      <p>A security-first browser with an encrypted vault, built-in tracker blocking, and accessibility at its core. Open source. Cross-platform.</p>
+      <div class="badge">v0.2.0-alpha</div>
+      <h1>Your data is yours.<br>No exceptions.</h1>
+      <p>A privacy-first browser where everything is encrypted, history is off by default, and 8 privacy protections are on from the moment you launch. No telemetry. No compromise. Open source.</p>
       <div class="downloads">
         <a href="https://github.com/CrashBytes/volarybrowser/releases/latest" class="btn btn-primary">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
@@ -237,19 +305,55 @@
     </div>
   </section>
 
+  <section class="privacy-section" id="privacy">
+    <div class="container">
+      <h2>Privacy that actually means something</h2>
+      <p>Most browsers call themselves private, then leak your data in a dozen ways. Volary ships with real protections turned on by default -- not buried in settings you will never find.</p>
+      <div class="privacy-defaults">
+        <h3>8 protections ON by default</h3>
+        <ul class="privacy-list">
+          <li>Third-party cookie blocking</li>
+          <li>WebRTC leak prevention</li>
+          <li>Referrer stripping</li>
+          <li>Fingerprint resistance</li>
+          <li>DNS over HTTPS</li>
+          <li>Auto-delete cookies on tab close</li>
+          <li>Clear all data on exit</li>
+          <li>Community blocklists (~138K domains)</li>
+        </ul>
+        <div class="privacy-note">History is off by default. No browsing data is recorded unless you explicitly opt in.</div>
+      </div>
+    </div>
+  </section>
+
   <section class="features" id="features">
     <div class="container">
-      <h2>Built different</h2>
+      <h2>Built for people who refuse to be tracked</h2>
       <div class="feature-grid">
         <div class="feature">
           <div class="feature-icon">&#128274;</div>
-          <h3>Encrypted Vault</h3>
-          <p>XChaCha20-Poly1305 encryption with Argon2id key derivation. Your passwords and sensitive data stay locked down.</p>
+          <h3>SQLCipher Encrypted Database</h3>
+          <p>Your entire database is encrypted at rest with SQLCipher. Bookmarks, settings, vault data -- all of it. Not just passwords. Everything.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">&#129302;</div>
+          <h3>Private AI Sidebar</h3>
+          <p>AI chat powered by self-hosted Ollama. Your conversations never leave your machine. No cloud. No API calls. Fully private by design.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">&#128269;</div>
+          <h3>Uncensored Search</h3>
+          <p>SearXNG integration gives you uncensored, unfiltered search results from multiple engines -- with no tracking or filter bubbles.</p>
         </div>
         <div class="feature">
           <div class="feature-icon">&#128683;</div>
           <h3>Tracker Blocking</h3>
-          <p>Built-in network filter blocks ads and trackers before they load. No extensions needed.</p>
+          <p>Built-in network filter with expanded community blocklists covering ~138,000 domains. Ads and trackers are killed before they load.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">&#128274;</div>
+          <h3>Encrypted Vault</h3>
+          <p>XChaCha20-Poly1305 encryption with Argon2id key derivation. Your passwords and sensitive data stay locked down.</p>
         </div>
         <div class="feature">
           <div class="feature-icon">&#128214;</div>
